@@ -11,7 +11,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     Limitations geneLimitations;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    List<Object> motoPrefabs;
+
     void Start()
     {
         activeCamera = Camera.main;
