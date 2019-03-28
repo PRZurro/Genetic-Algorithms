@@ -49,8 +49,6 @@ namespace Endless2DTerrain
             //{
             //    RemoveTerrainObject();
             //}
-
-            Resources.Load()
         }
 
         /// <summary>
