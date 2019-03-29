@@ -12,7 +12,6 @@ public abstract class Gen<EnumOfIDs, T>
     [SerializeField]
     protected EnumOfIDs m_ID;
 
-    [System.NonSerialized]
     protected T m_value; //Value in serialization will be ignored
 
     [SerializeField]
@@ -81,9 +80,14 @@ public abstract class Gen<EnumOfIDs, T>
     /// Copy constructor
     /// </summary>
     /// <param name="other"></param>
-    protected Gen(Gen<EnumOfIDs, T> other)
+    protected Gen(Gen<EnumOfIDs, T> other, bool mutate = false)
     {
         CopyFrom(other);
+
+        if(mutate)
+        {
+            Mutate();
+        }
     }
 
     /// <summary>

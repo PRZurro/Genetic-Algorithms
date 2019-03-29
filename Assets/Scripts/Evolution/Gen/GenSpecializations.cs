@@ -11,7 +11,7 @@ public class FGen : Gen<MotoFGenID, float>
     public FGen(FGen parent1, FGen parent2) : base(parent1, parent2)
     {}
 
-    public FGen(FGen other) : base(other)
+    public FGen(FGen other, bool mutate = false) : base(other, mutate)
     {}
 
     public FGen(MotoFGenID id, float minMutationVal, float maxMutationVal) : base(id, minMutationVal, maxMutationVal)
@@ -41,7 +41,7 @@ public class IGen : Gen<MotoIGenID, int>
     public IGen(IGen parent1, IGen parent2) : base(parent1, parent2)
     {}
 
-    public IGen(IGen other) : base(other)
+    public IGen(IGen other, bool mutate = false) : base(other, mutate)
     {}
 
     public override void Mutate()
@@ -62,7 +62,7 @@ public class BGen : Gen<MotoBGenID, bool>
     public BGen(MotoBGenID id, bool minMutationVal, bool maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
-    public BGen(BGen other) : base(other)
+    public BGen(BGen other, bool mutate = false) : base(other, mutate)
     {}
 
     public BGen(BGen parent1, BGen parent2) : base(parent1, parent2)
