@@ -30,25 +30,25 @@ namespace Endless2DTerrain
         /// </summary> 
         public void Cleanup(float beginX)
         {
-            List<TerrainPiece> piecesToRemove = new List<TerrainPiece>();
-            for (int i = 0; i < Pool.TerrainPieces.Count; i++)
-            {
-                TerrainPiece piece = Pool.TerrainPieces[i];
-                if (piece.NextTerrainOrigin.x < beginX)
-                {
-                    piecesToRemove.Add(piece);
-                }
-            }
+            //List<TerrainPiece> piecesToRemove = new List<TerrainPiece>();
+            //for (int i = 0; i < Pool.TerrainPieces.Count; i++)
+            //{
+            //    TerrainPiece piece = Pool.TerrainPieces[i];
+            //    if (piece.NextTerrainOrigin.x < beginX)
+            //    {
+            //        piecesToRemove.Add(piece);
+            //    }
+            //}
 
-            for (int i = 0; i < piecesToRemove.Count(); i++)
-            {
-                Pool.Remove(piecesToRemove[i]);
-            }
+            //for (int i = 0; i < piecesToRemove.Count(); i++)
+            //{
+            //    Pool.Remove(piecesToRemove[i]);
+            //}
 
-            if (Pool.TerrainPieces.Count == 0)
-            {
-                RemoveTerrainObject();
-            }
+            //if (Pool.TerrainPieces.Count == 0)
+            //{
+            //    RemoveTerrainObject();
+            //}
         }
 
         /// <summary>
