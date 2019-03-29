@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Motorcycle : MonoBehaviour
 {
-    private static double mutability;
     byte id;
 
-    Wheel leftWheel;
-    Wheel rightWheel;
+    MotoGenome genome;
 
-
+    //Wheel leftWheel;
+    //Wheel rightWheel;
 
     // Start is called before the first frame update
     void Start()

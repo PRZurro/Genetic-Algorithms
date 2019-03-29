@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// Float Gen class template specialization
 /// </summary>
-public class FGen : Gen<float>
+[System.Serializable]
+public class FGen : Gen<MotoFGenID, float>
 {
     public FGen(FGen parent1, FGen parent2) : base(parent1, parent2)
     {}
@@ -13,27 +14,28 @@ public class FGen : Gen<float>
     public FGen(FGen other) : base(other)
     {}
 
-    public FGen(float minMutationVal, float maxMutationVal) : base(minMutationVal, maxMutationVal)
+    public FGen(MotoFGenID id, float minMutationVal, float maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
-    public FGen(float value, float minMutationVal, float maxMutationVal) : base(value, minMutationVal, maxMutationVal)
+    public FGen(MotoFGenID id, float value, float minMutationVal, float maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
     {}
 
     public override void Mutate()
     {
-        Value = Random.Range(MinMutationValue, MaxMutationValue);
+        m_value = Random.Range(m_minMutationValue, m_maxMutationValue);
     }
 }
 
 /// <summary>
 /// Int Gen class template specialization
 /// </summary>
-public class IGen : Gen<int>
+[System.Serializable]
+public class IGen : Gen<MotoIGenID, int>
 {
-    public IGen(int value, int minMutationVal, int maxMutationVal) : base(value, minMutationVal, maxMutationVal)
+    public IGen(MotoIGenID id, int value, int minMutationVal, int maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
     {}
 
-    public IGen(int minMutationVal, int maxMutationVal) : base(minMutationVal, maxMutationVal)
+    public IGen(MotoIGenID id, int minMutationVal, int maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
     public IGen(IGen parent1, IGen parent2) : base(parent1, parent2)
@@ -44,19 +46,20 @@ public class IGen : Gen<int>
 
     public override void Mutate()
     {
-        Value = Random.Range(MinMutationValue, MaxMutationValue);
+        m_value = Random.Range(m_minMutationValue, m_maxMutationValue);
     }
 }
 
 /// <summary>
 /// Bool Gen class template specialization
 /// </summary>
-public class BGen : Gen<bool>
+[System.Serializable]
+public class BGen : Gen<MotoBGenID, bool>
 {
-    public BGen(bool value, bool minMutationVal, bool maxMutationVal) : base(value, minMutationVal, maxMutationVal)
+    public BGen(MotoBGenID id, bool value, bool minMutationVal, bool maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
     {}
 
-    public BGen(bool minMutationVal, bool maxMutationVal) : base(minMutationVal, maxMutationVal)
+    public BGen(MotoBGenID id, bool minMutationVal, bool maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
     public BGen(BGen other) : base(other)
@@ -67,6 +70,6 @@ public class BGen : Gen<bool>
 
     public override void Mutate()
     {
-        Value = Random.Range(0, 2) == 0;
+        m_value = Random.Range(0, 2) == 0;
     }
 }

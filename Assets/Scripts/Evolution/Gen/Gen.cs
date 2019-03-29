@@ -6,37 +6,52 @@ using UnityEngine;
 /// Class template that corresponds with a generic gen that must be implemented
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class Gen<T>
+[System.Serializable]
+public abstract class Gen<EnumOfIDs, T>
 {
-    public T Value { get; set; }
+    [SerializeField]
+    protected EnumOfIDs m_ID;
 
-    public T MinMutationValue { get; set; }
-    public T MaxMutationValue { get; set; }
+    [System.NonSerialized]
+    protected T m_value; //Value in serialization will be ignored
+
+    [SerializeField]
+    protected T m_minMutationValue;
+    [SerializeField]
+    protected T m_maxMutationValue;
 
     public static float Mutability { get; set; } // In percentage
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    protected Gen()
+    {}
 
     /// <summary>
     /// Recombination constructor, create a new Gen by inheriting the values of one gen parent (50% probability) or by mutating
     /// </summary>
     /// <param name="parent1"></param>
     /// <param name="parent2"></param>
-    protected Gen(Gen<T> parent1, Gen<T> parent2)
+    protected Gen(Gen<EnumOfIDs, T> parent1, Gen<EnumOfIDs, T> parent2)
     {
-        SetMutationValuesRange(parent1.MinMutationValue, parent1.MaxMutationValue); // Parents mutation limits must be equal
+        // Parents mutation limits and ID must be equal
+        Set(parent1.m_ID, parent1.m_minMutationValue, parent1.m_maxMutationValue);
 
+        // Inheritate or mutate
         if (Random.Range(0.0f, 100.0f) < Mutability)
         {
             Mutate();
         }
         else
         {
-            if (Random.Range(0.0f, 1.0f) < 0.5f) 
+            if (Random.Range(0.0f, 1.0f) < 0.5f)
             {
-                Value = parent1.Value; // Soft copy because limits have been initialized before
+                m_value = parent1.m_value; // Soft copy because limits have been initialized before
             }
             else
             {
-                Value = parent2.Value; // Soft copy because limits have been initialized before
+                m_value = parent2.m_value; // Soft copy because limits have been initialized before
             }
         }
     }
@@ -44,11 +59,11 @@ public abstract class Gen<T>
     /// <summary>
     /// Create a new Gen initializing all members
     /// <param name="value"></param>
-    /// <param name="minMutationVal"></param>
-    /// <param name="maxMutationVal"></param>
-    protected Gen(T value, T minMutationVal, T maxMutationVal)
+    /// <param name="minMutationValue"></param>
+    /// <param name="maxMutationValue"></param>
+    protected Gen(EnumOfIDs id, T value, T minMutationValue, T maxMutationValue)
     {
-        Set(value, minMutationVal, maxMutationVal);
+        Set(id, value, minMutationValue, maxMutationValue);
     }
 
     /// <summary>
@@ -56,9 +71,9 @@ public abstract class Gen<T>
     /// </summary>
     /// <param name="minMutationVal"></param>
     /// <param name="maxMutationVal"></param>
-    protected Gen(T minMutationVal, T maxMutationVal)
+    protected Gen(EnumOfIDs id, T minMutationVal, T maxMutationVal)
     {
-        SetMutationValuesRange(minMutationVal, maxMutationVal);
+        Set(id, minMutationVal, maxMutationVal);
         Mutate();
     }
 
@@ -66,7 +81,7 @@ public abstract class Gen<T>
     /// Copy constructor
     /// </summary>
     /// <param name="other"></param>
-    protected Gen(Gen<T> other)
+    protected Gen(Gen<EnumOfIDs, T> other)
     {
         CopyFrom(other);
     }
@@ -80,31 +95,80 @@ public abstract class Gen<T>
     /// Copy the values of another Gen to this
     /// </summary>
     /// <param name="other"></param>
-    protected void CopyFrom(Gen<T> other)
+    protected void CopyFrom(Gen<EnumOfIDs, T> other)
     {
-        Set(other.Value, other.MinMutationValue, other.MaxMutationValue);
+        Set(other.m_ID, other.m_value, other.m_minMutationValue, other.m_maxMutationValue);
     }
 
+    /////////////////////////////////////////////////SETTERS///////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// Set all members of this class  (except static Mutability member) that must be initialized to all type instance of this class template)
     /// </summary>
     /// <param name="value"></param>
     /// <param name="minMutationVal"></param>
     /// <param name="maxMutationVal"></param>
-    public void Set(T value, T minMutationVal, T maxMutationVal)
+    public void Set(EnumOfIDs id, T value, T minMutationVal, T maxMutationVal)
     {
-        Value = value;
-        SetMutationValuesRange(minMutationVal, maxMutationVal);
+        m_value = value;
+        Set(id, minMutationVal, maxMutationVal);
     }
 
     /// <summary>
     /// Set the mutation value limits
     /// </summary>
-    /// <param name="minMutationVal"></param>
-    /// <param name="maxMutationVal"></param>
-    public void SetMutationValuesRange(T minMutationVal, T maxMutationVal)
+    /// <param name="minMutationValue"></param>
+    /// <param name="maxMutationValue"></param>
+    public void Set(EnumOfIDs id, T minMutationValue, T maxMutationValue)
     {
-        MinMutationValue = minMutationVal;
-        MaxMutationValue = maxMutationVal;
+        m_ID = id;
+        SetMutationValueRange(minMutationValue, maxMutationValue);
+    }
+
+    public void SetID(EnumOfIDs ID)
+    {
+        m_ID = ID;
+    }
+
+    public void SetValue(EnumOfIDs ID)
+    {
+        m_ID = ID;
+    }
+
+    public void SetMinMutationValue(T minMutationValue)
+    {
+        m_minMutationValue = minMutationValue;
+    }
+
+    public void SetMaxMutationValue(T maxMutationValue)
+    {
+        m_maxMutationValue = maxMutationValue;
+    }
+
+    public void SetMutationValueRange(T minMutationValue , T maxMutationValue)
+    {
+        m_minMutationValue = minMutationValue;
+        m_maxMutationValue = maxMutationValue;
+    }
+
+    /////////////////////////////////////////////////GETTERS///////////////////////////////////////////////////////////////////////////////
+
+    public EnumOfIDs ID()
+    {
+        return m_ID;
+    }
+
+    public T Value()
+    {
+        return m_value;
+    }
+
+    public T MinMutationValue()
+    {
+        return m_minMutationValue;
+    }
+
+    public T MaxMutationValue()
+    {
+        return m_maxMutationValue;
     }
 }
