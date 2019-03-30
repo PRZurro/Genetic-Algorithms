@@ -10,34 +10,39 @@ public class MotoGenome
 
     public MotoGenome(List<FGen> fGenes, List<IGen> iGenes, List<BGen> bGenes)
     {
+        InitializeDictionaries();
+
         foreach(FGen fGen in fGenes)
         {
-            m_fGenes[fGen.ID()] = new FGen(fGen, true);
+            AddGen(new FGen(fGen, true));
         }
         foreach (IGen iGen in iGenes)
         {
-            m_iGenes[iGen.ID()] = new IGen(iGen, true);
+            AddGen(new IGen(iGen, true));
         }
         foreach (BGen bGen in bGenes)
         {
-            m_bGenes[bGen.ID()] = new BGen(bGen, true);
+            AddGen(new BGen(bGen, true));
         }
     }
 
     public MotoGenome(MotoGenome parent1, MotoGenome parent2)
     {
+        InitializeDictionaries();
         Recombine(parent1, parent2);
     }
 
     public MotoGenome(MotoGenome other)
     {
-        m_fGenes = other.m_fGenes;
-        m_iGenes = other.m_iGenes;
-        m_bGenes = other.m_bGenes;
+        m_fGenes = new Dictionary<MotoFGenID, FGen>(other.m_fGenes);
+        m_iGenes = new Dictionary < MotoIGenID, IGen >(other.m_iGenes);
+        m_bGenes = new Dictionary<MotoBGenID, BGen>(other.m_bGenes);
     }
 
     public MotoGenome()
-    { }
+    {
+        InitializeDictionaries();
+    }
 
     private bool Recombine(MotoGenome parent1, MotoGenome parent2)
     {
@@ -49,7 +54,7 @@ public class MotoGenome
             {
                 if (parent2.ExistsGen(pair.Key))
                 {
-                    m_fGenes[pair.Key] = new FGen(pair.Value, parent2.m_fGenes[pair.Key]);
+                    m_fGenes.Add(pair.Key, new FGen(pair.Value, parent2.m_fGenes[pair.Key]));
                 }
                 else
                 {
@@ -60,7 +65,7 @@ public class MotoGenome
             {
                 if (parent2.ExistsGen(pair.Key))
                 {
-                    m_iGenes[pair.Key] = new IGen(pair.Value, parent2.m_iGenes[pair.Key]);
+                    m_iGenes.Add(pair.Key, new IGen(pair.Value, parent2.m_iGenes[pair.Key]));
                 }
                 else
                 {
@@ -71,7 +76,7 @@ public class MotoGenome
             {
                 if (parent2.ExistsGen(pair.Key))
                 {
-                    m_bGenes[pair.Key] = new BGen(pair.Value, parent2.m_bGenes[pair.Key]);
+                    m_bGenes.Add(pair.Key, new BGen(pair.Value, parent2.m_bGenes[pair.Key]));
                 }
                 else
                 {
@@ -88,34 +93,34 @@ public class MotoGenome
     }
     ////////////////////////////////ADD GEN/////////////////////////////////////////////////
 
-    public void AddFGen(MotoFGenID genID, float genValue, float genMinValue, float genMaxValue)
+    public void AddGen(MotoFGenID genID, float genValue, float genMinValue, float genMaxValue)
     {
-        m_fGenes[genID] = new FGen(genID, genValue, genMinValue, genMaxValue);
+        AddGen(new FGen(genID, genValue, genMinValue, genMaxValue));
     }
 
-    public void AddIGen(MotoIGenID genID, int genValue, int genMinValue, int genMaxValue)
+    public void AddGen(MotoIGenID genID, int genValue, int genMinValue, int genMaxValue)
     {
-        m_iGenes[genID] = new IGen(genID, genValue, genMinValue, genMaxValue);
+        AddGen(new IGen(genID, genValue, genMinValue, genMaxValue));
     }
 
-    public void AddBGen(MotoBGenID genID, bool genValue, bool genMinValue, bool genMaxValue)
+    public void AddGen(MotoBGenID genID, bool genValue, bool genMinValue, bool genMaxValue)
     {
-        m_bGenes[genID] = new BGen(genID, genValue, genMinValue, genMaxValue);
+        AddGen(new BGen(genID, genValue, genMinValue, genMaxValue));
     }
 
-    public void AddFGen(FGen fGen)
+    public void AddGen(FGen fGen)
     {
-        m_fGenes[fGen.ID()] = new FGen(fGen);
+        m_fGenes.Add(fGen.ID(), new FGen(fGen));
     }
 
-    public void AddIGen(IGen iGen)
+    public void AddGen(IGen iGen)
     {
-        m_iGenes[iGen.ID()] = new IGen(iGen);
+        m_iGenes.Add(iGen.ID(), new IGen(iGen));
     }
 
-    public void AddBGen(BGen bGen)
+    public void AddGen(BGen bGen)
     {
-        m_bGenes[bGen.ID()] = new BGen(bGen);
+        m_bGenes.Add(bGen.ID(), new BGen(bGen));
     }
     ////////////////////////////////EXISTS GEN/////////////////////////////////////////////////
 
@@ -147,5 +152,12 @@ public class MotoGenome
     public BGen GetGen(MotoBGenID genType)
     {
         return m_bGenes[genType];
+    }
+
+    private void InitializeDictionaries()
+    {
+        m_fGenes = new Dictionary<MotoFGenID, FGen>();
+        m_iGenes = new Dictionary<MotoIGenID, IGen>();
+        m_bGenes = new Dictionary<MotoBGenID, BGen>();
     }
 }

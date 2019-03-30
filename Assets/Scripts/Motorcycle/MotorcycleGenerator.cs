@@ -53,11 +53,10 @@ public class MotorcycleGenerator : MonoBehaviour
 
         TuneChasis(motorcycleBasePrefab, genome);
 
-        TuneSwingArm(swingArm, genome);
+        TuneSwingarm(swingArm, genome);
 
-        TuneWheel(leftWheel, genome, MotoFGenID.RIGHT_WHEEL_SCALE, MotoBGenID.RIGHT_WHEEL_IS_MOTOR, MotoFGenID.RIGHT_WHEEL_SPEED);
-        TuneWheel(leftWheel, genome, MotoFGenID.RIGHT_WHEEL_SCALE, MotoBGenID.RIGHT_WHEEL_IS_MOTOR, MotoFGenID.RIGHT_WHEEL_SPEED);
-
+        TuneWheel(leftWheel, genome, MotoFGenID.LEFT_WHEEL_SCALE, MotoBGenID.LEFT_WHEEL_IS_MOTOR, MotoFGenID.LEFT_WHEEL_SPEED);
+        TuneWheel(rightWheel, genome, MotoFGenID.RIGHT_WHEEL_SCALE, MotoBGenID.RIGHT_WHEEL_IS_MOTOR, MotoFGenID.RIGHT_WHEEL_SPEED);
 
         return AssembleMotorcycle(motorcycleBasePrefab, swingArm, leftWheel, rightWheel);
     }
@@ -66,7 +65,7 @@ public class MotorcycleGenerator : MonoBehaviour
     {
         // Save all transform that will be used for assemble later
         Transform chasis = motorcycleBasePrefab.transform.GetChild(0);
-        Transform chasisAnchors = motorcycleBasePrefab.transform.GetChild(0);
+        Transform chasisAnchors = chasis.transform.GetChild(0);
 
         Transform chasisRightWheelAnchor = chasisAnchors.transform.Find("Front Wheel");
         Transform chasisSwingarmAnchor = chasisAnchors.transform.Find("Swingarm");
@@ -75,37 +74,41 @@ public class MotorcycleGenerator : MonoBehaviour
         Transform swingarm = swingarmParent.transform.GetChild(0);
         Transform swingarmLeftWheelAnchor = swingarm.GetChild(0);
 
+        chasis.GetComponent<Rigidbody2D>().simulated = false;
+        swingarm.GetComponent<Rigidbody2D>().simulated = false;
+        leftWheel.GetComponent<Rigidbody2D>().simulated = false;
+        rightWheel.GetComponent<Rigidbody2D>().simulated = false;
+
         // Positionate correctly all parts
 
         swingarmParent.transform.position = chasisSwingarmAnchor.position;
         swingarm.parent = motorcycleBasePrefab.transform;
 
-        leftWheel.transform.position = swingarmLeftWheelAnchor.transform.position;
-        rightWheel.transform.position = chasisRightWheelAnchor.transform.position;
-        
-        // Assemble joints
-
         HingeJoint2D swingarmHingeJoint = swingarm.GetComponent<HingeJoint2D>();
         swingarmHingeJoint.connectedBody = chasis.GetComponent<Rigidbody2D>();
-        swingarmHingeJoint.connectedAnchor = new Vector2(chasisSwingarmAnchor.position.x, chasisSwingarmAnchor.position.y);
+        swingarmHingeJoint.connectedAnchor = new Vector2(chasisSwingarmAnchor.localPosition.x, chasisSwingarmAnchor.localPosition.y);
+
+        leftWheel.transform.position = swingarmLeftWheelAnchor.transform.position;
+        leftWheel.transform.parent = motorcycleBasePrefab.transform;
+        rightWheel.transform.position = chasisRightWheelAnchor.transform.position;
+        rightWheel.transform.parent = motorcycleBasePrefab.transform;
 
         WheelJoint2D leftWheelJoint = leftWheel.GetComponent<WheelJoint2D>();
-        WheelJoint2D rightWheelJoint = rightWheel.GetComponent<WheelJoint2D>();
-
         leftWheelJoint.connectedBody = swingarm.GetComponent<Rigidbody2D>();
-        rightWheelJoint.connectedBody = chasisRightWheelAnchor.GetComponent<Rigidbody2D>();
+        leftWheelJoint.connectedAnchor = new Vector2(swingarmLeftWheelAnchor.localPosition.x, swingarmLeftWheelAnchor.localPosition.y);
 
-        leftWheelJoint.connectedAnchor = new Vector2(swingarmLeftWheelAnchor.position.x, swingarmLeftWheelAnchor.position.y);
-        rightWheelJoint.connectedAnchor = new Vector2(chasisRightWheelAnchor.position.x, chasisRightWheelAnchor.position.y); 
+        WheelJoint2D rightWheelJoint = rightWheel.GetComponent<WheelJoint2D>();
+        rightWheelJoint.connectedBody = chasis.GetComponent<Rigidbody2D>();
+        rightWheelJoint.connectedAnchor = new Vector2(chasisRightWheelAnchor.localPosition.x, chasisRightWheelAnchor.localPosition.y);
 
         //Add a driver  
 
-        Destroy(swingarmParent);
+        Destroy(swingarmParent.gameObject);
 
-        Destroy(swingarmLeftWheelAnchor);
-        Destroy(chasisRightWheelAnchor);
+        Destroy(swingarmLeftWheelAnchor.gameObject);
+        Destroy(chasisRightWheelAnchor.gameObject);
 
-        Destroy(chasisAnchors);
+        Destroy(chasisAnchors.gameObject);
 
         return motorcycleBasePrefab;
     }
@@ -116,14 +119,14 @@ public class MotorcycleGenerator : MonoBehaviour
             chasis.transform.localScale *= genome.GetGen(MotoFGenID.CHASIS_SCALE).Value();
     }
 
-    private void TuneSwingArm(GameObject swingarm, MotoGenome genome)
+    private void TuneSwingarm(GameObject swingarm, MotoGenome genome)
     {
         if(genome.ExistsGen(MotoFGenID.SWINGARM_ANGLE_MAX))
         {
             JointAngleLimits2D newLimits = new JointAngleLimits2D();
             newLimits.min = 0.0f;
             newLimits.max = genome.GetGen(MotoFGenID.SWINGARM_ANGLE_MAX).Value();
-            swingarm.GetComponent<HingeJoint2D>().limits = newLimits;
+            swingarm.transform.GetChild(0).GetComponent<HingeJoint2D>().limits = newLimits;
         }
     }
 
