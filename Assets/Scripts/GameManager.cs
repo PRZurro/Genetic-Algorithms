@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     Camera activeCamera;
 
     [SerializeField]
+    GameSettings gameSettings;
+    [SerializeField]
     GenesSettings genesSettings;
     [SerializeField]
     MotorcyclePrefabs motorcyclePrefabs;

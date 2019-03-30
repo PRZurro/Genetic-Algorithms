@@ -46,7 +46,7 @@ public class IGen : Gen<MotoIGenID, int>
 
     public override void Mutate()
     {
-        m_value = Random.Range(m_minMutationValue, m_maxMutationValue);
+        m_value = Random.Range(m_minMutationValue, m_maxMutationValue + 1);
     }
 }
 

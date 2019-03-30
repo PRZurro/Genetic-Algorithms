@@ -12,9 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7989c77fd296c4a9577f19e0fc5451, type: 3}
   m_Name: NewGenesSettings
   m_EditorClassIdentifier: 
-  MasterFloatGenes: []
-  MasterIntegerGenes: []
-  MasterBooleanGenes: []
-  FinishLinePosX: 300
-  NumberMotorcycles: 100
-  MutabilityProbability: 0
+  Mutability: 0.05
+  MasterFloatGenes:
+  - m_ID: 0
+    m_minMutationValue: 10
+    m_maxMutationValue: 600
+  - m_ID: 3
+    m_minMutationValue: 0.3
+    m_maxMutationValue: 5
+  - m_ID: 4
+    m_minMutationValue: 10
+    m_maxMutationValue: 600
+  - m_ID: 7
+    m_minMutationValue: 0.3
+    m_maxMutationValue: 5
+  - m_ID: 8
+    m_minMutationValue: 0.3
+    m_maxMutationValue: 6
+  - m_ID: 10
+    m_minMutationValue: 0
+    m_maxMutationValue: 30
+  MasterIntegerGenes:
+  - m_ID: 0
+    m_minMutationValue: 0
+    m_maxMutationValue: 2
+  - m_ID: 1
+    m_minMutationValue: 0
+    m_maxMutationValue: 2
+  MasterBooleanGenes:
+  - m_ID: 0
+    m_minMutationValue: 0
+    m_maxMutationValue: 1
+  - m_ID: 1
+    m_minMutationValue: 0
+    m_maxMutationValue: 1
