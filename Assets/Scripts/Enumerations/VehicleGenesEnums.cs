@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MotoFGenID : byte
+public enum FGenID : byte
 {
     LEFT_WHEEL_SPEED = 0,
     //LEFT_WHEEL_DAMPING_RATIO = 1,
@@ -15,16 +15,17 @@ public enum MotoFGenID : byte
     CHASIS_SCALE = 8,
     // CHASIS_MASS = 8,
     //SWINGARM_ANGLE_MIN = 9,
-    SWINGARM_ANGLE_MAX = 10
+    SWINGARM_SCALE = 10,
+    SWINGARM_ANGLE_MAX = 11
 }
 
-public enum MotoIGenID : byte
+public enum IGenID : byte
 {
     CHASIS_TYPE = 0,
     SWINGARM_TYPE = 1
 }
 
-public enum MotoBGenID : byte
+public enum BGenID : byte
 {
     LEFT_WHEEL_IS_MOTOR = 0,
     RIGHT_WHEEL_IS_MOTOR = 1

@@ -5,10 +5,16 @@ using UnityEngine;
 public class Motorcycle : MonoBehaviour
 {
     int m_ID;
-    MotoGenome m_motoGenome;
+    float m_score;
+
+    Genome m_genome;
 
     WheelJoint2D m_leftWheelJoint;
     WheelJoint2D m_rightWheelJoint;
+    GameObject   m_chasis;
+    GameObject   m_swingarm;
+
+    GameObject m_driver;
 
     //float gasConsumption; // Per second, must be multiplied by the mass of each component
     //float gasCapacity;
@@ -22,9 +28,9 @@ public class Motorcycle : MonoBehaviour
     {
     }
 
-    public void SetMotoGenome(MotoGenome motoGenome)
+    public void SetMotoGenome(Genome motoGenome)
     {
-        m_motoGenome = motoGenome;
+        m_genome = motoGenome;
     }
 
     public int ID()
@@ -32,12 +38,18 @@ public class Motorcycle : MonoBehaviour
         return m_ID;
     }
 
-    public MotoGenome motoGenome()
+    public float score()
     {
-        return m_motoGenome;
+        return m_score;
     }
 
-    public void Initialize(MotoGenome motoGenome, WheelJoint2D leftWheelJoint, WheelJoint2D rightWheelJoint)
+
+    public Genome genome()
+    {
+        return m_genome;
+    }
+
+    public void Initialize(Genome motoGenome, WheelJoint2D leftWheelJoint, WheelJoint2D rightWheelJoint)
     {
         SetMotoGenome(motoGenome);
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7416725189015574900}
   - component: {fileID: 7841516025533998968}
   - component: {fileID: 5429966193439979351}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chasis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4762443339641261381}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Driver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 50509895507081694}
   - component: {fileID: 851011728654569341}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Motorcycle_base_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317960125040820694}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Front Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7089877792408459208}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Anchors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4371645370844626111}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Swingarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

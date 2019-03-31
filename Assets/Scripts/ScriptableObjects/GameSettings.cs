@@ -9,7 +9,7 @@ public class GameSettings : ScriptableObject
     public float FinishLinePosX = 300;
 
     [Tooltip("Must be an even number greater than zero")]
-    [Range(100, 1000)]
-    public int NumberMotorcycles = 100;
+    [Range(2, 50)]
+    public int NumberMotorcycles = 2;
 
 }

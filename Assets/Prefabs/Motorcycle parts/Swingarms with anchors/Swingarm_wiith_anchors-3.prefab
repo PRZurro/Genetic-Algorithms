@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1246725642014002313}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Swingarm_wiith_anchors-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,16 +199,6 @@ PrefabInstance:
       propertyPath: m_Anchor.y
       value: 0.045
       objectReference: {fileID: 0}
-    - target: {fileID: 7968794448494125036, guid: 0e04a7bfa7c22d2418ebd486339c62ba,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968794448494125036, guid: 0e04a7bfa7c22d2418ebd486339c62ba,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.62
-      objectReference: {fileID: 0}
     - target: {fileID: 7968794448494125039, guid: 0e04a7bfa7c22d2418ebd486339c62ba,
         type: 3}
       propertyPath: m_Sprite
@@ -234,6 +224,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Simulated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968794448494125036, guid: 0e04a7bfa7c22d2418ebd486339c62ba,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 3.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968794448494125036, guid: 0e04a7bfa7c22d2418ebd486339c62ba,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.62
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7968794448494125036, guid: 0e04a7bfa7c22d2418ebd486339c62ba, type: 3}

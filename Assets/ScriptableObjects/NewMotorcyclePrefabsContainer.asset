@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 52263d5a95185aa4490d518460957a73, type: 3}
   m_Name: NewMotorcyclePrefabsContainer
-  m_EditorClassIdentifier: Assembly-CSharp::MotorcyclePrefabs
+  m_EditorClassIdentifier: 
   BasePrefabs:
   - {fileID: 3074648360195910591, guid: fae48e3382d0ab1488e26ee284c594ff, type: 3}
   - {fileID: 3074648360195910591, guid: 2d7f36ea67f302b4cb61aee4b6d0aa40, type: 3}

@@ -6,7 +6,7 @@ using UnityEngine;
 /// Float Gen class template specialization
 /// </summary>
 [System.Serializable]
-public class FGen : Gen<MotoFGenID, float>
+public class FGen : Gen<FGenID, float>
 {
     public FGen(FGen parent1, FGen parent2) : base(parent1, parent2)
     {}
@@ -14,10 +14,10 @@ public class FGen : Gen<MotoFGenID, float>
     public FGen(FGen other, bool mutate = false) : base(other, mutate)
     {}
 
-    public FGen(MotoFGenID id, float minMutationVal, float maxMutationVal) : base(id, minMutationVal, maxMutationVal)
+    public FGen(FGenID id, float minMutationVal, float maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
-    public FGen(MotoFGenID id, float value, float minMutationVal, float maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
+    public FGen(FGenID id, float value, float minMutationVal, float maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
     {}
 
     public override void Mutate()
@@ -30,12 +30,12 @@ public class FGen : Gen<MotoFGenID, float>
 /// Int Gen class template specialization
 /// </summary>
 [System.Serializable]
-public class IGen : Gen<MotoIGenID, int>
+public class IGen : Gen<IGenID, int>
 {
-    public IGen(MotoIGenID id, int value, int minMutationVal, int maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
+    public IGen(IGenID id, int value, int minMutationVal, int maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
     {}
 
-    public IGen(MotoIGenID id, int minMutationVal, int maxMutationVal) : base(id, minMutationVal, maxMutationVal)
+    public IGen(IGenID id, int minMutationVal, int maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
     public IGen(IGen parent1, IGen parent2) : base(parent1, parent2)
@@ -54,12 +54,12 @@ public class IGen : Gen<MotoIGenID, int>
 /// Bool Gen class template specialization
 /// </summary>
 [System.Serializable]
-public class BGen : Gen<MotoBGenID, bool>
+public class BGen : Gen<BGenID, bool>
 {
-    public BGen(MotoBGenID id, bool value, bool minMutationVal, bool maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
+    public BGen(BGenID id, bool value, bool minMutationVal, bool maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
     {}
 
-    public BGen(MotoBGenID id, bool minMutationVal, bool maxMutationVal) : base(id, minMutationVal, maxMutationVal)
+    public BGen(BGenID id, bool minMutationVal, bool maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
     public BGen(BGen other, bool mutate = false) : base(other, mutate)
