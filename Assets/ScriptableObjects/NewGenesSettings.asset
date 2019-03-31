@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7989c77fd296c4a9577f19e0fc5451, type: 3}
+  m_Name: NewGenesSettings
+  m_EditorClassIdentifier: 
+  Mutability: 4
+  MasterFloatGenes:
+  - m_ID: 0
+    m_minMutationValue: 50
+    m_maxMutationValue: 1500
+  - m_ID: 3
+    m_minMutationValue: 0.3
+    m_maxMutationValue: 2
+  - m_ID: 4
+    m_minMutationValue: 10
+    m_maxMutationValue: 1200
+  - m_ID: 7
+    m_minMutationValue: 0.3
+    m_maxMutationValue: 2
+  - m_ID: 8
+    m_minMutationValue: 0.3
+    m_maxMutationValue: 2
+  - m_ID: 11
+    m_minMutationValue: 0
+    m_maxMutationValue: 30
+  - m_ID: 10
+    m_minMutationValue: 0.3
+    m_maxMutationValue: 3
+  MasterIntegerGenes:
+  - m_ID: 0
+    m_minMutationValue: 0
+    m_maxMutationValue: 2
+  - m_ID: 1
+    m_minMutationValue: 0
+    m_maxMutationValue: 2
+  MasterBooleanGenes:
+  - m_ID: 0
+    m_minMutationValue: 0
+    m_maxMutationValue: 1
+  - m_ID: 1
+    m_minMutationValue: 0
+    m_maxMutationValue: 1
