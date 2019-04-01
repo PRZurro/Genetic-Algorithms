@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scriptable object to store some genes settings
+/// </summary>
 [CreateAssetMenu(fileName = "NewGenesSettings", menuName = "Genes Settings", order = 51)]
 public class GenesSettings : ScriptableObject
 {

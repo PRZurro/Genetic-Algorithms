@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enumeration of the genes of type float
+/// </summary>
 public enum FGenID : byte
 {
     LEFT_WHEEL_SPEED = 0,
@@ -19,12 +22,18 @@ public enum FGenID : byte
     SWINGARM_ANGLE_MAX = 11
 }
 
+/// <summary>
+/// Enumeration of the genes of type integer
+/// </summary>
 public enum IGenID : byte
 {
     CHASIS_TYPE = 0,
     SWINGARM_TYPE = 1
 }
 
+/// <summary>
+/// Enumeration of the genes of type boolean
+/// </summary>
 public enum BGenID : byte
 {
     LEFT_WHEEL_IS_MOTOR = 0,

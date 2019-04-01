@@ -19,14 +19,21 @@ public class Generation
 
     string m_bestGenomeString;
     string m_averageGenomeString;
-
+    
+    /// <summary>
+    /// Constructor of a generation info container. Save the best genome and do an arithmetic average of each gen
+    /// </summary>
+    /// <param name="motorcycles"></param>
+    /// <param name="ID"></param>
     public Generation(List<Motorcycle> motorcycles, int ID)
     {
         m_ID = ID;
 
+        // Save the best genome and best score
         m_bestGenome = new Genome(motorcycles[0].genome());
         m_bestScore = motorcycles[motorcycles.Count -1].score();
 
+        // Get all available genes for later average calculation 
         List<FGenID> fGenIDs = motorcycles[0].genome().GetFGenesKeys();
         List<IGenID> iGenIDs = motorcycles[0].genome().GetIGenesKeys();
         List<BGenID> bGenIDs = motorcycles[0].genome().GetBGenesKeys();
@@ -35,6 +42,7 @@ public class Generation
         m_iGenesAverage = new Dictionary<IGenID, float>();
         m_bGenesAverage = new Dictionary<BGenID, float>();
 
+        // Add all the genes and inialize to 0
         foreach (FGenID fGenID in fGenIDs)
         {
             m_fGenesAverage.Add(fGenID, 0.0f);
@@ -50,6 +58,7 @@ public class Generation
 
         m_scoreAverage = 0.0f;
 
+        // Summatory of each motorcycle gen
         foreach (Motorcycle motorcycle in motorcycles)
         {
             m_scoreAverage += motorcycle.score();
@@ -71,6 +80,7 @@ public class Generation
             }
         }
 
+        // Divide each summatory by the number of motorcycles
         int nMotorcycles = motorcycles.Count;
 
         m_scoreAverage *= 1.0f / (float)nMotorcycles;
@@ -88,20 +98,34 @@ public class Generation
             m_bGenesAverage[bGenID] *= 1.0f / (float)nMotorcycles;
         }
 
+        // Save the string for later
         m_bestGenomeString = BestGenomeToString();
         m_averageGenomeString = AverageToString();
     }
 
+    /// <summary>
+    /// Comparison method to compare which generation is better
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     public bool IsBetterThan(Generation other)
     {
         return (m_scoreAverage >= other.m_scoreAverage);
     }
 
+    /// <summary>
+    /// Best genome to string
+    /// </summary>
+    /// <returns></returns>
     private string BestGenomeToString()
     {
         return "Score: " + m_bestScore + "\n\n" + m_bestGenome.ToString();
     }
 
+    /// <summary>
+    /// Average genome to string
+    /// </summary>
+    /// <returns></returns>
     private string AverageToString()
     {
         string genomeString = "---- AVERAGE FLOAT GENES ----\n";
@@ -128,7 +152,10 @@ public class Generation
         return "Average score: " + m_scoreAverage + "\n\n" + genomeString;
     }
     
-
+    /// <summary>
+    /// Generation to string (use the strings saved before)
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         return m_bestGenomeString + "\n\n " + m_averageGenomeString;

@@ -23,7 +23,9 @@ public class GenerationsManager : MonoBehaviour
 
     Vector3 m_lastButtonPosition;
 
-
+    /// <summary>
+    /// Get the instance
+    /// </summary>
     public static GenerationsManager Instance
     {
         get
@@ -37,16 +39,27 @@ public class GenerationsManager : MonoBehaviour
             return m_instance;
         }
     }
+
+    /// <summary>
+    /// Initialize some components
+    /// </summary>
     void Awake()
     {
         m_instance = this;
     }
 
+    /// <summary>
+    /// Initialize some components
+    /// </summary>
     private void Start()
     {
         m_generationsRegistry = new List<Generation>();
     }
 
+    /// <summary>
+    /// Register a new generation 
+    /// </summary>
+    /// <param name="motorcycles"></param>
     public void RegisterGeneration(List<Motorcycle> motorcycles)
     {
         m_generationsRegistry.Add(new Generation(motorcycles, m_currentGeneration));
@@ -54,12 +67,19 @@ public class GenerationsManager : MonoBehaviour
         m_curGenerationText.text = "Generation: " + ++m_currentGeneration;
     }
 
+    /// <summary>
+    /// Method called by onClick method of buttons
+    /// </summary>
+    /// <param name="generationID"></param>
     public void SetGenerationText(int generationID)
     {
         Debug.Log(generationID);
         m_infoText.text =  "GENERATION " + generationID + ":\n" + m_generationsRegistry[generationID].ToString();
     }
 
+    /// <summary>
+    /// Create a new method with a delegate to SetGenerationText
+    /// </summary>
     public void CreateButton()
     {
         GameObject button = Instantiate(m_buttonPrefab, m_scrollViewContent);

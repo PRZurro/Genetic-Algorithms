@@ -8,15 +8,38 @@ using UnityEngine;
 [System.Serializable]
 public class FGen : Gen<FGenID, float>
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parent1"></param>
+    /// <param name="parent2"></param>
     public FGen(FGen parent1, FGen parent2) : base(parent1, parent2)
     {}
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="other"></param>
+    /// <param name="mutate"></param>
     public FGen(FGen other, bool mutate = false) : base(other, mutate)
     {}
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="minMutationVal"></param>
+    /// <param name="maxMutationVal"></param>
     public FGen(FGenID id, float minMutationVal, float maxMutationVal) : base(id, minMutationVal, maxMutationVal)
     {}
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="value"></param>
+    /// <param name="minMutationVal"></param>
+    /// <param name="maxMutationVal"></param>
     public FGen(FGenID id, float value, float minMutationVal, float maxMutationVal) : base(id, value, minMutationVal, maxMutationVal)
     {}
 

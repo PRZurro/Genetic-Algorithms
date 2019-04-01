@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CollisionDetector">
+    <Position X="3" Y="4.25" Width="2.5" />
+    <NestedTypes>
+      <Delegate Name="CollisionDetector.CollisionCommunication" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\CollisionDetector.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CollisionDetector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACQAEgAQACEAIAAAAAQAIQAACAAAgAAYAACCACQiAEA=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenerationsManager">
+    <Position X="8" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAABAAACAAAAAAABAAEAAAAAAARAAIwAgAARAAAEA=</HashCode>
+      <FileName>Assets\Scripts\GenerationsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gen&lt;EnumOfIDs, T&gt;">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEAQAAAAhiAAAEAAAAAEAAQAIAQkCAAkAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Evolution\Gen\Gen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FGen">
+    <Position X="10.5" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Evolution\Gen\GenSpecializations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IGen">
+    <Position X="12.5" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Evolution\Gen\GenSpecializations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BGen">
+    <Position X="8.5" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Evolution\Gen\GenSpecializations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Generation">
+    <Position X="14.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAwAQAAAAEAAAgAAgAAIAAAAAAAAAECAAEAAI=</HashCode>
+      <FileName>Assets\Scripts\Evolution\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Genome">
+    <Position X="12" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgACAAAAEAQAAQQAAAAAAAAEAAAgAAAEAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Evolution\Genome.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Motorcycle">
+    <Position X="5.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQ4ICACAADBAgQgCAIEIAgAAAAyAQIIAAAAEAAAAAQA=</HashCode>
+      <FileName>Assets\Scripts\Motorcycle\Motorcycle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MotorcycleGenerator">
+    <Position X="3" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAACAAQAAAAAAAAAAAAACAAgAAAIQAQAAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\Motorcycle\MotorcycleGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSettings">
+    <Position X="2.5" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIABAAAAgAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\GameSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenesSettings">
+    <Position X="5" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAACABAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\GenesSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MotorcyclePrefabs">
+    <Position X="0.5" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAAAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\MotorcyclePrefabs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="FGenID">
+    <Position X="10.5" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgUAAgAAAAAIAAAAAAAAAAAAAAQAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Enumerations\VehicleGenesEnums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IGenID">
+    <Position X="12.5" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enumerations\VehicleGenesEnums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BGenID">
+    <Position X="8.5" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enumerations\VehicleGenesEnums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -36,11 +36,24 @@ public class GameManager : MonoBehaviour
 
     Transform m_motorcyclesParent;
 
+    /// <summary>
+    /// Initialize some components  and members
+    /// </summary>
     void Awake()
     {
         m_instance = this;
+
+        // Static members of each class initialization
+        FGen.Mutability = m_genesSettings.mutability;
+        IGen.Mutability = m_genesSettings.mutability;
+        BGen.Mutability = m_genesSettings.mutability;
+
+        Motorcycle.HeadCollisionPenalization = m_gameSettings.HeadCollisionPenalization;
     }
 
+    /// <summary>
+    /// Initialize some components  and members
+    /// </summary>
     void Start()
     {
         m_motorcycleGenerator = MotorcycleGenerator.Instance;
@@ -49,44 +62,41 @@ public class GameManager : MonoBehaviour
         m_activeCamera = Camera.main;
         m_activeCameraStartPosition = m_activeCamera.transform.position;
 
-        FGen.Mutability = m_genesSettings.mutability;
-        IGen.Mutability = m_genesSettings.mutability;
-        BGen.Mutability = m_genesSettings.mutability;
-
         m_motorcycles = new List<Motorcycle>();
-        PrepareNextGeneration();
-        m_curGenerationTime = m_gameSettings.m_generationTime;
+
+        CreateNextGeneration(); // Create the first generation of motorcycles
+
+        m_curGenerationTime = m_gameSettings.GenerationTime;
 
         m_motorcyclesParent = GameObject.Find("Motorcycles").transform;
 
-        Motorcycle.HeadCollisionPenalization = m_gameSettings.m_headCollisionPenalization;
     }
 
+    /// <summary>
+    /// Core application's method
+    /// </summary>
     void Update()
     {
         CheckInput();
 
-        m_curGenerationTime -= Time.deltaTime;
+        m_curGenerationTime -= Time.deltaTime; //Timer
         m_timeLeft.text = "Time left: " + m_curGenerationTime;
 
-        m_motorcycles.Sort(SortByScore);
+        m_motorcycles.Sort(SortByScore); // Sort the motorcycles by them scores
 
-        if (m_curGenerationTime <= 0)
+        if (m_curGenerationTime <= 0) // Time's up
         {
-
-            m_curGenerationTime = m_gameSettings.m_generationTime;
+            m_curGenerationTime = m_gameSettings.GenerationTime;
             FinishCurrentGeneration();
-            PrepareNextGeneration();
+            CreateNextGeneration();
         }
 
-        SetCameraPositionX(m_motorcycles[m_motorcycles.Count-1].GetCurrentHeadPositionX());
+        SetCameraPositionX(m_motorcycles[m_motorcycles.Count - 1].GetCurrentHeadPositionX()); // Set the camera position to the best motorcycle
     }
 
-    IEnumerator CreateMotorcycle(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-    }
-
+    /// <summary>
+    /// Hide or show the canvas and Mute or Unmute the audio
+    /// </summary>
     void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -100,16 +110,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Finish current generation: Register it + 50% population killed
+    /// </summary>
     private void FinishCurrentGeneration()
     {
-
-        foreach(Motorcycle moto in m_motorcycles)
-        {
-            Debug.Log(moto.score());
-        }
-
-        if (m_curGenerationTime >= m_gameSettings.m_generationTime)
+        if (m_curGenerationTime >= m_gameSettings.GenerationTime)
         {
             m_motorcycles.Sort(SortByScore);
 
@@ -121,41 +127,44 @@ public class GameManager : MonoBehaviour
             List<int> indices = new List<int>();
 
             // #ThanosSnap kill 50% of population based on the motorcycle performance. Better performance, lower probability to be snapped
-
-            do
             {
-                for (int i = 0, j = nMotorcycles; i < nMotorcycles; i++, j--)
+                do
                 {
-                    if (!indices.Contains(i))
+                    for (int i = 0, j = nMotorcycles; i < nMotorcycles; i++, j--)
                     {
-                        float snapProbability = j * 1.0f / (float)m_gameSettings.m_numberMotorcycles;
-
-                        if (Random.Range(0.0f, 100.0f) <= snapProbability)
+                        if (!indices.Contains(i))
                         {
-                            indices.Add(i);
-                            //i++;
+                            float snapProbability = j * 1.0f / (float)m_gameSettings.NumberMotorcycles;
+
+                            if (Random.Range(0.0f, 100.0f) <= snapProbability)
+                            {
+                                indices.Add(i);
+                            }
                         }
                     }
+                } while (indices.Count <= max);
+
+                indices.Sort();
+
+                for (int i = indices.Count - 1; i > 0; i--)
+                {
+                    Debug.Log(indices[i]);
+                    Motorcycle snappedMotorcycle = m_motorcycles[indices[i]];
+                    m_motorcycles.RemoveAt(indices[i]); // #IDontWantToGo
+                    Destroy(snappedMotorcycle.gameObject); // #RIP
                 }
-            } while (indices.Count <= max);
-
-            indices.Sort();
-
-            for(int i = indices.Count - 1; i > 0; i-- )
-            {
-                Debug.Log(indices[i]);
-                Motorcycle snappedMotorcycle = m_motorcycles[indices[i]];
-                m_motorcycles.RemoveAt(indices[i]);
-                Destroy(snappedMotorcycle.gameObject); // #IDontWantToGo
             }
         }
     }
 
-    private void PrepareNextGeneration()
+    /// <summary>
+    /// Create a new generation
+    /// </summary>
+    private void CreateNextGeneration()
     {
-        int nChildren = m_gameSettings.m_numberMotorcycles;
+        int nChildren = m_gameSettings.NumberMotorcycles;
 
-        if (m_motorcycles.Count > 0)
+        if (m_motorcycles.Count > 0) // if is not the first generation (0)
         {
             int nParents = m_motorcycles.Count;
 
@@ -172,7 +181,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 childrens.Add(m_motorcycleGenerator.CreateMotorcycle(m_motorcycles[parent1], m_motorcycles[parent2]));
-                childrens[i].transform.parent = m_motorcyclesParent;  
+                childrens[i].transform.parent = m_motorcyclesParent;
             }
 
             foreach (Motorcycle moto in m_motorcycles)
@@ -184,7 +193,7 @@ public class GameManager : MonoBehaviour
             m_motorcycles = new List<Motorcycle>(childrens);
             childrens.Clear();
         }
-        else
+        else // First generation
         {
             for (int i = 0; i < nChildren; i++)
             {
@@ -194,23 +203,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method used by the canvas's slider to scale game time
+    /// </summary>
+    /// <param name="timeScaler"></param>
     public void SetGameTimeScale(Slider timeScaler)
     {
         Time.timeScale = timeScaler.value;
         m_timeScaleText.text = "Time scale: x" + timeScaler.value;
     }
 
+    /// <summary>
+    /// Sort motorcycles by score
+    /// </summary>
+    /// <param name="p1"></param>
+    /// <param name="p2"></param>
+    /// <returns></returns>
     static int SortByScore(Motorcycle p1, Motorcycle p2)
     {
         return p1.score().CompareTo(p2.score());
     }
 
+    /// <summary>
+    /// Set camera position X to the input received (with some conditions)
+    /// </summary>
+    /// <param name="positionX"></param>
     private void SetCameraPositionX(float positionX)
     {
         Vector3 cameraPosition = m_activeCamera.transform.position;
-        float newPositionX = positionX - m_gameSettings.m_cameraLeftOffset;
+        float newPositionX = positionX - m_gameSettings.CameraLeftOffset; // Input position + desired offset 
 
-        if (newPositionX > m_activeCameraStartPosition.x)
+        if (newPositionX > m_activeCameraStartPosition.x) 
         {
             cameraPosition.x = newPositionX;
             m_activeCamera.transform.position = cameraPosition;

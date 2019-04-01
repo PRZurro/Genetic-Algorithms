@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 3677641624606798521, guid: 94928b3217874c742aaa93f495c2df86, type: 3}
   WheelPrefab: {fileID: 4940288760436918699, guid: f2d41782bce469749a738b8cf5da4add,
     type: 3}
-  driver: {fileID: 6892679621753036624, guid: 9be93d5d993952b4cad17999e56ca059, type: 3}
+  Driver: {fileID: 6892679621753036624, guid: 9be93d5d993952b4cad17999e56ca059, type: 3}

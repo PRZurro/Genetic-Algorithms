@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scriptable objects to store some game settings
+/// </summary>
 [CreateAssetMenu(fileName = "NewGameSettings", menuName = "Game Settings", order = 52)]
 public class GameSettings : ScriptableObject
 {
@@ -10,13 +13,14 @@ public class GameSettings : ScriptableObject
 
     [Tooltip("Must be an even number greater than zero")]
     [Range(2, 50)]
-    public int m_numberMotorcycles = 2;
+    public int NumberMotorcycles = 2;
 
     [Range(5.0f, 100.0f)]
-    public float m_generationTime;
+    public float GenerationTime;
 
     [Range(0.0f, 100.0f)]
-    public float m_cameraLeftOffset;
+    public float CameraLeftOffset;
 
-    public float m_headCollisionPenalization;
+    public float HeadCollisionPenalization;
 }
+

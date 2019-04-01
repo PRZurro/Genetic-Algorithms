@@ -41,16 +41,19 @@ public abstract class Gen<EnumOfIDs, T>
         if (Random.Range(0.0f, 100.0f) < Mutability)
         {
             Mutate();
+            Debug.Log("mutation");
         }
         else
         {
             if (Random.Range(0.0f, 1.0f) < 0.5f)
             {
                 m_value = parent1.m_value; // Soft copy because limits have been initialized before
+                Debug.Log("chosen parent1");
             }
             else
             {
                 m_value = parent2.m_value; // Soft copy because limits have been initialized before
+                Debug.Log("chosen parent2");
             }
         }
     }
@@ -133,21 +136,38 @@ public abstract class Gen<EnumOfIDs, T>
         m_ID = ID;
     }
 
+    /// <summary>
+    /// Set the value
+    /// </summary>
+    /// <param name="ID"></param>
     public void SetValue(EnumOfIDs ID)
     {
         m_ID = ID;
     }
 
+    /// <summary>
+    /// Set the minimum mutation value
+    /// </summary>
+    /// <param name="minMutationValue"></param>
     public void SetMinMutationValue(T minMutationValue)
     {
         m_minMutationValue = minMutationValue;
     }
 
+    /// <summary>
+    /// Set the max mutation value
+    /// </summary>
+    /// <param name="maxMutationValue"></param>
     public void SetMaxMutationValue(T maxMutationValue)
     {
         m_maxMutationValue = maxMutationValue;
     }
 
+    /// <summary>
+    /// Set the range of mutation
+    /// </summary>
+    /// <param name="minMutationValue"></param>
+    /// <param name="maxMutationValue"></param>
     public void SetMutationValueRange(T minMutationValue , T maxMutationValue)
     {
         m_minMutationValue = minMutationValue;
@@ -156,21 +176,37 @@ public abstract class Gen<EnumOfIDs, T>
 
     /////////////////////////////////////////////////GETTERS///////////////////////////////////////////////////////////////////////////////
 
+    /// <summary>
+    /// Get ID
+    /// </summary>
+    /// <returns></returns>
     public EnumOfIDs ID()
     {
         return m_ID;
     }
 
+    /// <summary>
+    /// Get value
+    /// </summary>
+    /// <returns></returns>
     public T Value()
     {
         return m_value;
     }
 
+    /// <summary>
+    /// Get Min mutation value
+    /// </summary>
+    /// <returns></returns>
     public T MinMutationValue()
     {
         return m_minMutationValue;
     }
 
+    /// <summary>
+    /// get max mutation value
+    /// </summary>
+    /// <returns></returns>
     public T MaxMutationValue()
     {
         return m_maxMutationValue;

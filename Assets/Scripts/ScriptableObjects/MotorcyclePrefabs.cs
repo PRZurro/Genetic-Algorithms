@@ -8,5 +8,5 @@ public class MotorcyclePrefabs : ScriptableObject
     public List<GameObject> BasePrefabs;
     public List<GameObject> SwingArmPrefabs;
     public GameObject WheelPrefab;
-    public GameObject driver;
+    public GameObject Driver;
 }

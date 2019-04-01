@@ -9,6 +9,12 @@ public class Genome
     Dictionary<IGenID, IGen> m_iGenes;
     Dictionary<BGenID, BGen> m_bGenes;
 
+    /// <summary>
+    /// Constructor that needs separated lists of genes to be initialized
+    /// </summary>
+    /// <param name="fGenes"></param>
+    /// <param name="iGenes"></param>
+    /// <param name="bGenes"></param>
     public Genome(List<FGen> fGenes, List<IGen> iGenes, List<BGen> bGenes)
     {
         InitializeDictionaries();
@@ -27,12 +33,21 @@ public class Genome
         }
     }
 
+    /// <summary>
+    /// Recombination constructor
+    /// </summary>
+    /// <param name="parent1"></param>
+    /// <param name="parent2"></param>
     public Genome(Genome parent1, Genome parent2)
     {
         InitializeDictionaries();
         Recombine(parent1, parent2);
     }
 
+    /// <summary>
+    /// Copy constructor
+    /// </summary>
+    /// <param name="other"></param>
     public Genome(Genome other)
     {
         m_fGenes = new Dictionary<FGenID, FGen>(other.m_fGenes);
@@ -40,11 +55,20 @@ public class Genome
         m_bGenes = new Dictionary<BGenID, BGen>(other.m_bGenes);
     }
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
     public Genome()
     {
         InitializeDictionaries();
     }
 
+    /// <summary>
+    /// Combine two parents into this using the gen class methods
+    /// </summary>
+    /// <param name="parent1"></param>
+    /// <param name="parent2"></param>
+    /// <returns></returns>
     private bool Recombine(Genome parent1, Genome parent2)
     {
         if (parent1.m_fGenes.Count == parent2.m_fGenes.Count
@@ -94,67 +118,134 @@ public class Genome
     }
     ////////////////////////////////ADD GEN/////////////////////////////////////////////////
 
+    /// <summary>
+    /// Create a gen of type float with the input paramaters
+    /// </summary>
+    /// <param name="genID"></param>
+    /// <param name="genValue"></param>
+    /// <param name="genMinValue"></param>
+    /// <param name="genMaxValue"></param>
     public void AddGen(FGenID genID, float genValue, float genMinValue, float genMaxValue)
     {
         AddGen(new FGen(genID, genValue, genMinValue, genMaxValue));
     }
 
+    /// <summary>
+    /// Create a gen of type integer with the input paramaters
+    /// </summary>
+    /// <param name="genID"></param>
+    /// <param name="genValue"></param>
+    /// <param name="genMinValue"></param>
+    /// <param name="genMaxValue"></param>
     public void AddGen(IGenID genID, int genValue, int genMinValue, int genMaxValue)
     {
         AddGen(new IGen(genID, genValue, genMinValue, genMaxValue));
     }
 
+    /// <summary>
+    /// Create a gen of type boolean with the input paramaters
+    /// </summary>
+    /// <param name="genID"></param>
+    /// <param name="genValue"></param>
+    /// <param name="genMinValue"></param>
+    /// <param name="genMaxValue"></param>
     public void AddGen(BGenID genID, bool genValue, bool genMinValue, bool genMaxValue)
     {
         AddGen(new BGen(genID, genValue, genMinValue, genMaxValue));
     }
 
+    /// <summary>
+    /// Add a gen of type float (copy)
+    /// </summary>
+    /// <param name="fGen"></param>
     public void AddGen(FGen fGen)
     {
         m_fGenes.Add(fGen.ID(), new FGen(fGen));
     }
 
+    /// <summary>
+    /// Add a gen of type integer (copy)
+    /// </summary>
+    /// <param name="iGen"></param>
     public void AddGen(IGen iGen)
     {
         m_iGenes.Add(iGen.ID(), new IGen(iGen));
     }
 
+    /// <summary>
+    /// Add a gen of type integer (copy)
+    /// </summary>
+    /// <param name="bGen"></param>
     public void AddGen(BGen bGen)
     {
         m_bGenes.Add(bGen.ID(), new BGen(bGen));
     }
     ////////////////////////////////EXISTS GEN/////////////////////////////////////////////////
 
+    /// <summary>
+    /// Check if exists a gen of type float with input key
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
     public bool ExistsGen(FGenID ID)
     {
         return m_fGenes.ContainsKey(ID);
     }
 
+    /// <summary>
+    /// Check if exists a gen of type integer with input key
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
     public bool ExistsGen(IGenID ID)
     {
         return m_iGenes.ContainsKey(ID);
     }
 
+    /// <summary>
+    /// Check if exists a gen of type boolean with input key 
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
     public bool ExistsGen(BGenID ID)
     {
         return m_bGenes.ContainsKey(ID);
     }
     ////////////////////////////////GETTERS/////////////////////////////////////////////////
+    
+    /// <summary>
+    /// Get a fGen by key
+    /// </summary>
+    /// <param name="genType"></param>
+    /// <returns></returns>
     public FGen GetGen(FGenID genType)
     {
         return m_fGenes[genType];
     }
 
+    /// <summary>
+    /// Get an iGen by key
+    /// </summary>
+    /// <param name="genType"></param>
+    /// <returns></returns>
     public IGen GetGen(IGenID genType)
     {
         return m_iGenes[genType];
     }
 
+    /// <summary>
+    /// Get an bGen by key
+    /// </summary>
+    /// <param name="genType"></param>
+    /// <returns></returns>
     public BGen GetGen(BGenID genType)
     {
         return m_bGenes[genType];
     }
 
+    /// <summary>
+    /// Initialize all the collections
+    /// </summary>
     private void InitializeDictionaries()
     {
         m_fGenes = new Dictionary<FGenID, FGen>();
@@ -162,6 +253,10 @@ public class Genome
         m_bGenes = new Dictionary<BGenID, BGen>();
     }
 
+    /// <summary>
+    /// Get a list of the fGen keys available
+    /// </summary>
+    /// <returns></returns>
     public List<FGenID> GetFGenesKeys()
     {
         List<FGenID> keys = new List<FGenID>();
@@ -173,6 +268,10 @@ public class Genome
         return keys;
     }
 
+    /// <summary>
+    /// Get a list of the iGen keys availables
+    /// </summary>
+    /// <returns></returns>
     public List<IGenID> GetIGenesKeys()
     {
         List<IGenID> keys = new List<IGenID>();
@@ -184,6 +283,10 @@ public class Genome
         return keys;
     }
 
+    /// <summary>
+    /// Get a list of the bGen keys available
+    /// </summary>
+    /// <returns></returns>
     public List<BGenID> GetBGenesKeys()
     {
         List<BGenID> keys = new List<BGenID>();
@@ -195,6 +298,10 @@ public class Genome
         return keys;
     }
     
+    /// <summary>
+    /// Genome to String
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         string genomeString = "---- FLOAT GENES ----\n";
