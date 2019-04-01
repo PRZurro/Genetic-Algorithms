@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930c4972ca4d5a6409ee403c04e5f80e, type: 3}
   m_Name: NewGameSettings
   m_EditorClassIdentifier: 
-  FinishLinePosX: 300
-  NumberMotorcycles: 100
+  m_numberMotorcycles: 6
+  m_generationTime: 25.6
+  m_cameraLeftOffset: 15
+  m_headCollisionPenalization: 1

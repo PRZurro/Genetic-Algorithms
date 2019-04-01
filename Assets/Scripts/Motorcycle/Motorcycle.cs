@@ -9,26 +9,42 @@ public class Motorcycle : MonoBehaviour
 
     Genome m_genome;
 
+    Transform m_leftWheel;
+    Rigidbody2D m_leftWheelRB2D;
     WheelJoint2D m_leftWheelJoint;
-    WheelJoint2D m_rightWheelJoint;
-    GameObject   m_chasis;
-    GameObject   m_swingarm;
 
-    GameObject m_driver;
+    Transform m_rightWheel;
+    Rigidbody2D m_rightWheelRB2D;
+    WheelJoint2D m_rightWheelJoint;
+
+    Transform   m_chasis;
+    Transform   m_swingarm;
+
+    Transform m_driver;
+    Transform m_driverHead;
+    int m_timesHeadCollided;
+    float m_startHeadPositionX;
+
+    public static float HeadCollisionPenalization;
 
     //float gasConsumption; // Per second, must be multiplied by the mass of each component
     //float gasCapacity;
 
     void Start()
     {
+        m_score = 0.0f;
+        m_ID = 0;
+        m_startHeadPositionX = 0.0f;
+        m_timesHeadCollided = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        m_score = m_driverHead.position.x -  m_startHeadPositionX - (HeadCollisionPenalization * m_timesHeadCollided);
     }
 
-    public void SetMotoGenome(Genome motoGenome)
+    public void SetGenome(Genome motoGenome)
     {
         m_genome = motoGenome;
     }
@@ -49,17 +65,40 @@ public class Motorcycle : MonoBehaviour
         return m_genome;
     }
 
-    public void Initialize(Genome motoGenome, WheelJoint2D leftWheelJoint, WheelJoint2D rightWheelJoint)
+    public void Initialize(Genome motoGenome, Transform leftWheel, Transform rightWheel, Transform driver, Transform driverHead)
     {
-        SetMotoGenome(motoGenome);
+        SetGenome(motoGenome);
 
-        m_leftWheelJoint = leftWheelJoint;
-        m_rightWheelJoint = rightWheelJoint; 
+        m_leftWheel = leftWheel;
+        m_leftWheelRB2D = m_leftWheel.GetComponent<Rigidbody2D>();
+        m_leftWheelJoint = m_leftWheel.GetComponent<WheelJoint2D>();
+
+        m_rightWheel = rightWheel;
+        m_rightWheelRB2D = m_leftWheel.GetComponent<Rigidbody2D>();
+        m_rightWheelJoint = m_rightWheel.GetComponent<WheelJoint2D>();
+
+        m_driver = driver;
+        m_driverHead = driverHead;
+    }
+
+    public float GetCurrentHeadPositionX()
+    {
+        return m_driverHead.position.x;
+    }
+
+    public void SetID(int ID)
+    {
+        m_ID = ID;
     }
 
     public void StopMotors()
     {
         m_leftWheelJoint.useMotor = false;
         m_rightWheelJoint.useMotor = false;
+    }
+
+    public void HeadCollided()
+    {
+        m_timesHeadCollided++;
     }
 }
