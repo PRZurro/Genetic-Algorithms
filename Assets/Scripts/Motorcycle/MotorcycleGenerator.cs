@@ -27,22 +27,22 @@ public class MotorcycleGenerator : MonoBehaviour
         m_motorcyclePrefabs = motorcyclePrefabs;
     }
 
-    public GameObject CreateMotorcycle(Genome genome)
+    public Motorcycle CreateMotorcycle(Genome genome)
     {
         return ConstructMotorcycle(genome);
     }
 
-    public GameObject CreateMotorcycle(Motorcycle vehicleParent1, Motorcycle vehicleParent2)
+    public Motorcycle CreateMotorcycle(Motorcycle vehicleParent1, Motorcycle vehicleParent2)
     {
         return CreateMotorcycle(new Genome(vehicleParent1.genome(), vehicleParent2.genome()));
     }
 
-    public GameObject CreateMotorcycle(List<FGen> fGenes, List<IGen> iGenes, List<BGen> bGenes)
+    public Motorcycle CreateMotorcycle(List<FGen> fGenes, List<IGen> iGenes, List<BGen> bGenes)
     {
         return CreateMotorcycle(new Genome(fGenes, iGenes, bGenes));
     }
 
-    private GameObject ConstructMotorcycle(Genome genome)
+    private Motorcycle ConstructMotorcycle(Genome genome)
     {
         // Create the motorcycle parts 
         // Save all transform that will be used for assemble later
@@ -61,10 +61,10 @@ public class MotorcycleGenerator : MonoBehaviour
 
         GameObject driver = Instantiate(m_motorcyclePrefabs.driver);
 
-        return AssembleMotorcycle(motorcycleBase.transform, swingarmParent.transform, leftWheel.transform, rightWheel.transform, driver.transform);
+        return AssembleMotorcycle(motorcycleBase.transform, swingarmParent.transform, leftWheel.transform, rightWheel.transform, driver.transform, genome);
     }
 
-    private GameObject AssembleMotorcycle(Transform motorcycleBase, Transform swingarmParent, Transform leftWheelPrefab, Transform rightWheel, Transform driver)
+    private Motorcycle AssembleMotorcycle(Transform motorcycleBase, Transform swingarmParent, Transform leftWheel, Transform rightWheel, Transform driver, Genome genome)
     {
         Transform chasis = motorcycleBase.GetChild(0);
         Transform chasisAnchors = chasis.GetChild(0);
@@ -84,10 +84,10 @@ public class MotorcycleGenerator : MonoBehaviour
         swingarmHingeJoint.connectedBody = chasis.GetComponent<Rigidbody2D>();
         swingarmHingeJoint.connectedAnchor = new Vector2(chasisSwingarmAnchor.localPosition.x, chasisSwingarmAnchor.localPosition.y);
 
-        leftWheelPrefab.parent = swingarm;
-        leftWheelPrefab.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        leftWheel.parent = swingarm;
+        leftWheel.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
-        WheelJoint2D leftWheelJoint = leftWheelPrefab.GetComponent<WheelJoint2D>();
+        WheelJoint2D leftWheelJoint = leftWheel.GetComponent<WheelJoint2D>();
         leftWheelJoint.connectedBody = swingarm.GetComponent<Rigidbody2D>();
         leftWheelJoint.connectedAnchor = new Vector2(swingarmLeftWheelAnchor.localPosition.x, swingarmLeftWheelAnchor.localPosition.y);
 
@@ -105,7 +105,7 @@ public class MotorcycleGenerator : MonoBehaviour
 
         // Set parents of each part to the base object
         swingarm.parent = motorcycleBase;
-        leftWheelPrefab.parent = motorcycleBase;
+        leftWheel.parent = motorcycleBase;
         rightWheel.parent = motorcycleBase;
         driver.parent = motorcycleBase;
 
@@ -117,7 +117,15 @@ public class MotorcycleGenerator : MonoBehaviour
         Destroy(chasisDriverAnchor.gameObject);
         Destroy(chasisAnchors.gameObject);
 
-        return motorcycleBase.gameObject;
+        // To finish, add a motorcycle controller component  to the parent object
+        Motorcycle motorcycleComp = motorcycleBase.gameObject.AddComponent<Motorcycle>();
+        Transform head = driver.Find("head").transform;
+        motorcycleComp.Initialize(genome, leftWheel, rightWheel, driver, head);
+
+        CollisionDetector collisionDetector = head.gameObject.AddComponent<CollisionDetector>();
+        collisionDetector.SetCollisionCommunication(motorcycleComp.HeadCollided);
+
+        return motorcycleComp;
     }
 
     private void TuneChasis(GameObject chasis, Genome genome)

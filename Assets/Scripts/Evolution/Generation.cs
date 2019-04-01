@@ -24,6 +24,9 @@ public class Generation
     {
         m_ID = ID;
 
+        m_bestGenome = new Genome(motorcycles[0].genome());
+        m_bestScore = motorcycles[motorcycles.Count -1].score();
+
         List<FGenID> fGenIDs = motorcycles[0].genome().GetFGenesKeys();
         List<IGenID> iGenIDs = motorcycles[0].genome().GetIGenesKeys();
         List<BGenID> bGenIDs = motorcycles[0].genome().GetBGenesKeys();
@@ -45,19 +48,11 @@ public class Generation
             m_bGenesAverage.Add(bGenID, 0.0f);
         }
 
-        m_bestScore = -10000.0f;
         m_scoreAverage = 0.0f;
 
-        int idBestGenome = -1;
         foreach (Motorcycle motorcycle in motorcycles)
         {
-            float motorcycleScore = motorcycle.score();
-
-            if (motorcycleScore >= m_bestScore)
-            {
-                m_bestScore = motorcycle.score();
-                idBestGenome = motorcycle.ID();
-            }
+            m_scoreAverage += motorcycle.score();
 
             foreach (FGenID fGenID in fGenIDs)
             {
@@ -74,27 +69,23 @@ public class Generation
                     m_bGenesAverage[bGenID] += 1.0f;
                 }
             }
-
-            m_scoreAverage += motorcycleScore;
         }
-
-        m_bestGenome = new Genome(motorcycles[idBestGenome].genome());
 
         int nMotorcycles = motorcycles.Count;
 
-        m_scoreAverage /= nMotorcycles;
+        m_scoreAverage *= 1.0f / (float)nMotorcycles;
 
-        foreach(KeyValuePair<FGenID, float> pair in m_fGenesAverage)
+        foreach(FGenID fGenID in fGenIDs)
         {
-            m_fGenesAverage[pair.Key] /= nMotorcycles;
+            m_fGenesAverage[fGenID] *= 1.0f / (float)nMotorcycles;
         }
-        foreach (KeyValuePair<IGenID, float> pair in m_iGenesAverage)
+        foreach (IGenID iGenID in iGenIDs)
         {
-            m_iGenesAverage[pair.Key] /= nMotorcycles;
+            m_iGenesAverage[iGenID] *= 1.0f / (float)nMotorcycles;
         }
-        foreach (KeyValuePair<BGenID, float> pair in m_bGenesAverage)
+        foreach (BGenID bGenID in bGenIDs)
         {
-            m_bGenesAverage[pair.Key] /= nMotorcycles;
+            m_bGenesAverage[bGenID] *= 1.0f / (float)nMotorcycles;
         }
 
         m_bestGenomeString = BestGenomeToString();

@@ -221,7 +221,7 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: 0
-    m_UpperAngle: 60
+    m_UpperAngle: 35
 --- !u!1 &6892679621753036624
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6892679621753036625}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Driver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
