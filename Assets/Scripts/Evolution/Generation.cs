@@ -161,4 +161,3 @@ public class Generation
         return m_bestGenomeString + "\n\n " + m_averageGenomeString;
     }
 }
-

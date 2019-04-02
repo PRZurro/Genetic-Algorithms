@@ -23,4 +23,3 @@ public class GameSettings : ScriptableObject
 
     public float HeadCollisionPenalization;
 }
-

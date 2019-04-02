@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     float m_curGenerationTime;
 
+    [SerializeField]
     Transform m_motorcyclesParent;
 
     /// <summary>
@@ -67,9 +68,6 @@ public class GameManager : MonoBehaviour
         CreateNextGeneration(); // Create the first generation of motorcycles
 
         m_curGenerationTime = m_gameSettings.GenerationTime;
-
-        m_motorcyclesParent = GameObject.Find("Motorcycles").transform;
-
     }
 
     /// <summary>

@@ -29,7 +29,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Gen&lt;EnumOfIDs, T&gt;">
-    <Position X="10.25" Y="0.5" Width="1.5" />
+    <Position X="10.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAIAEAQAAAAhiAAAEAAAAAEAAQAIAQkCAAkAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Evolution\Gen\Gen.cs</FileName>
@@ -57,14 +57,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Generation">
-    <Position X="14.25" Y="0.5" Width="2" />
+    <Position X="14.75" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAwAQAAAAEAAAgAAgAAIAAAAAAAAAECAAEAAI=</HashCode>
       <FileName>Assets\Scripts\Evolution\Generation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Genome">
-    <Position X="12" Y="0.5" Width="2" />
+    <Position X="12.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgACAAAAEAQAAQQAAAAAAAAEAAAgAAAEAAAQ=</HashCode>
       <FileName>Assets\Scripts\Evolution\Genome.cs</FileName>
