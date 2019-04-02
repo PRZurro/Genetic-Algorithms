@@ -132,10 +132,11 @@ public class GameManager : MonoBehaviour
                     {
                         if (!indices.Contains(i))
                         {
-                            float snapProbability = j * 1.0f / (float)m_gameSettings.NumberMotorcycles;
+                            float snapProbability = j * 1.0f / (float)m_gameSettings.NumberMotorcycles * 100.0f;
 
                             if (Random.Range(0.0f, 100.0f) <= snapProbability)
                             {
+                                Debug.Log("Snap Probability: " + snapProbability + " index: "+ i);
                                 indices.Add(i);
                             }
                         }
